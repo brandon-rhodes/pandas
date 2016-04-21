@@ -1320,15 +1320,19 @@ Thur,Lunch,Yes,51.51,17"""
                            )  # TODO what should join do with names ?
 
     def test_swaplevel(self):
-        swapped = self.frame['A'].swaplevel(0, 1)
-        swapped2 = self.frame['A'].swaplevel('first', 'second')
+        swapped = self.frame['A'].swaplevel()
+        swapped2 = self.frame['A'].swaplevel(0, 1)
+        swapped3 = self.frame['A'].swaplevel('first', 'second')
         self.assertFalse(swapped.index.equals(self.frame.index))
         assert_series_equal(swapped, swapped2)
+        assert_series_equal(swapped, swapped3)
 
-        back = swapped.swaplevel(0, 1)
-        back2 = swapped.swaplevel('second', 'first')
+        back = swapped.swaplevel()
+        back2 = swapped.swaplevel(0, 1)
+        back3 = swapped.swaplevel('second', 'first')
         self.assertTrue(back.index.equals(self.frame.index))
         assert_series_equal(back, back2)
+        assert_series_equal(back, back3)
 
         ft = self.frame.T
         swapped = ft.swaplevel('first', 'second', axis=1)
@@ -1337,6 +1341,11 @@ Thur,Lunch,Yes,51.51,17"""
 
     def test_swaplevel_panel(self):
         panel = Panel({'ItemA': self.frame, 'ItemB': self.frame * 2})
+
+        result = panel.swaplevel(axis='major')
+        expected = panel.copy()
+        expected.major_axis = expected.major_axis.swaplevel()
+        tm.assert_panel_equal(result, expected)
 
         result = panel.swaplevel(0, 1, axis='major')
         expected = panel.copy()

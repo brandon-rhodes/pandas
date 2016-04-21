@@ -1949,7 +1949,7 @@ class Series(base.IndexOpsMixin, strings.StringAccessorMixin,
         return self.sort_index(level=level, ascending=ascending,
                                sort_remaining=sort_remaining)
 
-    def swaplevel(self, i, j, copy=True):
+    def swaplevel(self, i=-2, j=-1, copy=True):
         """
         Swap levels i and j in a MultiIndex
 

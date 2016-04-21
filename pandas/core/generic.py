@@ -522,7 +522,7 @@ class NDFrame(PandasObject):
         except:
             return self
 
-    def swaplevel(self, i, j, axis=0):
+    def swaplevel(self, i=-2, j=-1, axis=0):
         """
         Swap levels i and j in a MultiIndex on a particular axis
 

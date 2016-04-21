@@ -1194,7 +1194,7 @@ class MultiIndex(Index):
             return MultiIndex(levels=new_levels, labels=new_labels,
                               names=new_names, verify_integrity=False)
 
-    def swaplevel(self, i, j):
+    def swaplevel(self, i=-2, j=-1):
         """
         Swap level i with level j. Do not change the ordering of anything
 
