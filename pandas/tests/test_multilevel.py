@@ -1346,7 +1346,7 @@ Thur,Lunch,Yes,51.51,17"""
     def test_swaplevel_panel(self):
         panel = Panel({'ItemA': self.frame, 'ItemB': self.frame * 2})
         expected = panel.copy()
-        expected.major_axis = expected.major_axis.swaplevel()
+        expected.major_axis = expected.major_axis.swaplevel(0, 1)
 
         for result in (panel.swaplevel(axis='major'),
                        panel.swaplevel(0, axis='major'),
